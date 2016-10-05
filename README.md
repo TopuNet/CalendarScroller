@@ -1,5 +1,5 @@
-# 图片裁剪压缩插件，基于H5 v1.0.2
-###安装：npm install TopuNet-ImageCropCompressorH5
+# 移动端日历弹层滚轮选择插件 v1.0.1
+###安装：npm install TopuNet-CalendarScroller
 
 文件结构：
 -------------
@@ -10,55 +10,61 @@
 原生引用
 
         1. 页面底端引用 最新版 Jquery.min.js#1.x.x 或 zepto.min.js
-        2. 后引用 /jq/exif.js
-        3. 后引用 /jq/ImageCropCompressorH5.js
+        2. 后引用 /jq/jroll.min.js
+        3. 后引用 /jq/CalendarScroller.js
 
 requireJS引用
 
-        依赖ImageCropCompressorH5.js，成功后返回对象ImageCropCompressorH5
-        默认依赖zepto，/dist/ImageCropCompressorH5.js最下面的define可以改为jquery.min.js#1.x.x
+        依赖CalendarScroller.js，成功后返回对象CalendarScroller
+        默认依赖zepto，/dist/CalendarScroller.js最下面的define可以改为jquery.min.js#1.x.x
 
 功能配置及启用：
 --------------
-1. 初始化（监听某文件域的改变并弹出裁剪层，裁剪后压缩并转为base64）：
+1. 显示弹层：
 
         var opt = {
-            image_input_selector: "input[type=file]", // 监听的文件域选择器。默认input[type=file]
-            image_review_success_callback: null, // 图片预览加载完成后回调
-            image_width_px: "200", // 图片最终宽度，单位px。默认300
-            image_height_px: "400", // 图片最终高度，单位px。默认300
-            image_quality_kb: "150", // 图片最大质量，单位kb。默认300
-            image_crop_success_callback: function(base64) { // 图片裁剪完成后回调。自动关闭弹层。 function(裁剪后图片的base64){}
+            data: {
+                year: [2016, 2017, 2018, 2019, 2020, 2021, 2022], // 年列表，数组。无默认值
+                month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // 月列表，数组。默认[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                day: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31], // 日列表，数组。默认[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+                default_year: 2018, // 初始年，默认今年
+                default_month: 3, // 初始月，默认今月
+                default_day: 15 // 初始日，默认今日
+            },
+            // 点击确定的回调。确定时系统自动调用resetAll()重置
+            /*
+                result = {
+                    title: 2017-01-01,
+                    year: 2017,
+                    month: 1,
+                    day: 1
+                }
+            */
+            callback_confirm: function(result) {
+                console.dir(result);
+                CalendarScroller.close();
 
                 // Do Sth.
-                console.log("base64.length:" + base64.length);
-
+            },
+            // 点击取消的回调。取消时系统自动调用resetAll()重置
+            callback_cancel: function() {
+                CalendarScroller.close();
             }
         };
 
-        ImageCropCompressorH5.init(opt);
+        CalendarScroller.show(opt);
 
-2. 单独调用压缩图片方法：
+2. 关闭弹层：
+        
+        CalendarScroller.close();
 
-        /*
-            obj：源图片对象 或 图片Base64 或 canvas对象
-            quality：压缩目标质量（KB）
-            Callback(base64): 压缩后的base64
-        */
-        ImageCropCompressorH5.img_Compress(obj, quality, Callback);
+3. 重置日历：
 
-3. 关闭裁剪层
-
-        ImageCropCompressorH5.bg_close();
+        CalendarScroller.resetAll();
 
 更新日志：
 -------------
-v1.0.2
-
-        1. 增加关闭裁剪层方法
-        
 v1.0.1
 
         1. 制作、发布
-        2. 移动端使用，pc端还没太折腾
         

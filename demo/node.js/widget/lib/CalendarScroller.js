@@ -1,10 +1,8 @@
 /*
-    三天游日期滚轮选择
+    日历弹层滚轮选择插件 v1.0.1
+    npm install TopuNet-CalendarScroller
     高京
     2016-09-23
-    显示：show(opt);
-    关闭：close();
-    重置：resetAll();
 */
 
 var CalendarScroller_func = function() {
