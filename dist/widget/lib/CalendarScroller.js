@@ -1,10 +1,8 @@
 /*
-    三天游日期滚轮选择
+    日历弹层滚轮选择插件 v1.0.2
+    npm install TopuNet-CalendarScroller
     高京
     2016-09-23
-    显示：show(opt);
-    关闭：close();
-    重置：resetAll();
 */
 
 var CalendarScroller_func = function() {
@@ -23,7 +21,7 @@ var CalendarScroller_func = function() {
                     default_day: dt.getDate() // 默认日
                 },
                 // 点击确定的回调。确定时系统自动调用resetAll()重置
-                callback_confirm: function(result) {
+                callback_confirm: function() {
                     /*
                         result={
                             title: window_calendar_title.text(),
@@ -422,11 +420,20 @@ var CalendarScroller_func = function() {
         },
         // 根据Paras获得初始日期标题串
         getTitleDefault: function() {
-            var title_year = this.Paras.data.year[this.Paras.data.year.indexOf(this.Paras.data.default_year)].toString();
-            var title_month = this.Paras.data.month[this.Paras.data.month.indexOf(this.Paras.data.default_month)].toString();
+            var year_index = this.Paras.data.year.indexOf(this.Paras.data.default_year);
+            if (year_index === -1)
+                year_index = 0;
+            var month_index = this.Paras.data.month.indexOf(this.Paras.data.default_year);
+            if (month_index === -1)
+                month_index = 0;
+            var day_index = this.Paras.data.day.indexOf(this.Paras.data.default_year);
+            if (day_index === -1)
+                day_index = 0;
+            var title_year = this.Paras.data.year[year_index].toString();
+            var title_month = this.Paras.data.month[month_index].toString();
             if (title_month.length === 1)
                 title_month = "0" + title_month;
-            var title_day = this.Paras.data.day[this.Paras.data.day.indexOf(this.Paras.data.default_day)].toString();
+            var title_day = this.Paras.data.day[day_index].toString();
             if (title_day.length === 1)
                 title_day = "0" + title_day;
 
