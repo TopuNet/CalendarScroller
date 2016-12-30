@@ -1,5 +1,5 @@
 /*
-    日历弹层滚轮选择插件 v1.0.2
+    日历弹层滚轮选择插件 v1.0.3
     npm install TopuNet-CalendarScroller
     高京
     2016-09-23
@@ -375,6 +375,10 @@ var CalendarScroller_func = function() {
                 _this.Paras.callback_cancel.apply(_this);
             });
         },
+        // 阻止窗口背景层滚动（弹层时阻止，关闭层时恢复）
+        window_scroll_prevent: function(e) {
+            e.preventDefault();
+        },
         // 显示弹层
         show: function(opt) {
             var _this = this;
@@ -389,6 +393,8 @@ var CalendarScroller_func = function() {
 
             window.dom_bg.fadeIn(500, function() {
 
+                $(window).on("touchmove", _this.window_scroll_prevent);
+
                 // li高度
                 _this.calendar_li_height_px = window.dom_calendar_ul_year.find("li").css("height").replace("vw", "") * $(window).width() / 100;
 
@@ -402,7 +408,12 @@ var CalendarScroller_func = function() {
         },
         // 关闭弹层
         close: function() {
+            var _this = this;
+
             window.dom_bg.fadeOut(200);
+
+            // 解除对窗口滚动的阻止
+            $(window).unbind("touchmove", _this.window_scroll_prevent);
         },
         // 重置日历到初始状态
         resetAll: function() {
