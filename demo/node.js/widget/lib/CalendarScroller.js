@@ -1,5 +1,5 @@
 /*
-    日历弹层滚轮选择插件 v1.0.3
+    日历弹层滚轮选择插件 v1.0.4
     npm install TopuNet-CalendarScroller
     高京
     2016-09-23
@@ -434,10 +434,10 @@ var CalendarScroller_func = function() {
             var year_index = this.Paras.data.year.indexOf(this.Paras.data.default_year);
             if (year_index === -1)
                 year_index = 0;
-            var month_index = this.Paras.data.month.indexOf(this.Paras.data.default_year);
+            var month_index = this.Paras.data.month.indexOf(this.Paras.data.default_month);
             if (month_index === -1)
                 month_index = 0;
-            var day_index = this.Paras.data.day.indexOf(this.Paras.data.default_year);
+            var day_index = this.Paras.data.day.indexOf(this.Paras.data.default_day);
             if (day_index === -1)
                 day_index = 0;
             var title_year = this.Paras.data.year[year_index].toString();
