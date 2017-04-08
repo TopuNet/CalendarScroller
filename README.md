@@ -1,5 +1,5 @@
 # 移动端日历弹层滚轮选择插件 v1.0.4
-###安装：npm install TopuNet-CalendarScroller
+### 安装：npm install TopuNet-CalendarScroller
 
 文件结构：
 -------------
