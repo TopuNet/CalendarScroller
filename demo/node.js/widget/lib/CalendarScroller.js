@@ -168,7 +168,7 @@ var CalendarScroller_func = function() {
                 .css("margin", 0);
             window.dom_calendar.append(window.dom_bottom_button_ul);
 
-            // 底部按钮-确定
+            // 底部按钮-取消
             window.dom_bottom_button_cancel = $(document.createElement("li"))
                 .css("float", "left")
                 .css("width", "50%")
@@ -180,11 +180,11 @@ var CalendarScroller_func = function() {
                 .css("border-top", "solid 1px #dbdbdb")
                 .css("border-right", "solid 1px #dbdbdb")
                 .text("取消");
-            window.dom_bottom_button_ul.append(window.dom_bottom_button_cancel);
+            window.dom_bottom_button_ul.prepend(window.dom_bottom_button_cancel);
 
-            // 底部按钮-取消
+            // 底部按钮-确定
             window.dom_bottom_button_confirm = window.dom_bottom_button_cancel.clone();
-            window.dom_bottom_button_cancel
+            window.dom_bottom_button_confirm
                 .css("border-right", "none")
                 .css("width", "49%")
                 .css("color", "rgb(23,181,228)")
