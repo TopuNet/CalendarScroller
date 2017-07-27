@@ -1,5 +1,5 @@
 /*
-    日历弹层滚轮选择插件 v1.0.4
+    日历弹层滚轮选择插件 v1.0.5
     npm install TopuNet-CalendarScroller
     高京
     2016-09-23
@@ -169,26 +169,27 @@ var CalendarScroller_func = function() {
             window.dom_calendar.append(window.dom_bottom_button_ul);
 
             // 底部按钮-确定
-            window.dom_bottom_button_confirm = $(document.createElement("li"))
+            window.dom_bottom_button_cancel = $(document.createElement("li"))
                 .css("float", "left")
                 .css("width", "50%")
                 .css("height", "11.5vw")
                 .css("line-height", "12vw")
-                .css("color", "rgb(23,181,228)")
+                .css("color", "rgb(180,180,180)")
                 .css("font-size", "4.5vw")
                 .css("text-align", "center")
                 .css("border-top", "solid 1px #dbdbdb")
                 .css("border-right", "solid 1px #dbdbdb")
-                .text("确定");
-            window.dom_bottom_button_ul.append(window.dom_bottom_button_confirm);
+                .text("取消");
+            window.dom_bottom_button_ul.append(window.dom_bottom_button_cancel);
 
             // 底部按钮-取消
-            window.dom_bottom_button_cancel = window.dom_bottom_button_confirm.clone();
+            window.dom_bottom_button_confirm = window.dom_bottom_button_cancel.clone();
             window.dom_bottom_button_cancel
                 .css("border-right", "none")
                 .css("width", "49%")
-                .text("取消");
-            window.dom_bottom_button_ul.append(window.dom_bottom_button_cancel);
+                .css("color", "rgb(23,181,228)")
+                .text("确定");
+            window.dom_bottom_button_ul.append(window.dom_bottom_button_confirm);
         },
         // 插入日历中的li和title
         insertDom_li: function() {
@@ -393,7 +394,7 @@ var CalendarScroller_func = function() {
 
             window.dom_bg.fadeIn(500, function() {
 
-                $(window).on("touchmove", _this.window_scroll_prevent);
+                $(this).on("touchmove", _this.window_scroll_prevent);
 
                 // li高度
                 _this.calendar_li_height_px = window.dom_calendar_ul_year.find("li").css("height").replace("vw", "") * $(window).width() / 100;
