@@ -1,5 +1,5 @@
 /*
-    日历弹层滚轮选择插件 v1.0.5
+    日历弹层滚轮选择插件 v1.1.1
     npm install TopuNet-CalendarScroller
     高京
     2016-09-23
@@ -20,22 +20,20 @@ var CalendarScroller_func = function() {
                     default_month: dt.getMonth() + 1, //默认月
                     default_day: dt.getDate() // 默认日
                 },
-                // 点击确定的回调。确定时系统自动调用resetAll()重置
-                callback_confirm: function() {
-                    /*
-                        result={
-                            title: window_calendar_title.text(),
-                            year: 0,
-                            month: 0,
-                            day: 0
-                        }
-                    */
-                },
-                // 点击取消的回调。取消时系统自动调用resetAll()重置
+                // 点击确定的回调。
+                /*
+                    result={
+                        title: "2018-01-12",
+                        year: 2018,
+                        month: 1,
+                        day: 12
+                    }
+                */
+                callback_confirm: function(result) {},
+                // 点击取消的回调。
                 callback_cancel: function() {
 
                     _this.close.apply(_this);
-                    // _this.resetAll.apply(_this);
 
                     // setTimeout(function() {
                     //     _this.showLayer.apply(_this);
@@ -365,14 +363,11 @@ var CalendarScroller_func = function() {
                 result.month = parseInt(title_arr[1]);
                 result.day = parseInt(title_arr[2]);
 
-                _this.resetAll.apply(_this);
-
                 _this.Paras.callback_confirm(result);
             });
             window.dom_bottom_button_cancel.unbind().on("touchstart mousedown", function(e) {
                 e.preventDefault();
 
-                _this.resetAll.apply(_this);
                 _this.Paras.callback_cancel.apply(_this);
             });
         },
@@ -415,6 +410,10 @@ var CalendarScroller_func = function() {
 
             // 解除对窗口滚动的阻止
             $(window).unbind("touchmove", _this.window_scroll_prevent);
+
+            // 重置jroll对象
+            _this.resetAll.apply(_this);
+
         },
         // 重置日历到初始状态
         resetAll: function() {

@@ -1,4 +1,4 @@
-# 移动端日历弹层滚轮选择插件 v1.0.5
+# 移动端日历弹层滚轮选择插件 v1.1.1
 ### 安装：npm install TopuNet-CalendarScroller
 
 文件结构：
@@ -31,13 +31,13 @@ requireJS引用
                 default_month: 3, // 初始月，默认今月
                 default_day: 15 // 初始日，默认今日
             },
-            // 点击确定的回调。确定时系统自动调用resetAll()重置
+            // 点击确定的回调。
             /*
                 result = {
-                    title: 2017-01-01,
-                    year: 2017,
+                    title: "2018-01-12",
+                    year: 2018,
                     month: 1,
-                    day: 1
+                    day: 12
                 }
             */
             callback_confirm: function(result) {
@@ -46,7 +46,7 @@ requireJS引用
 
                 // Do Sth.
             },
-            // 点击取消的回调。取消时系统自动调用resetAll()重置
+            // 点击取消的回调。
             callback_cancel: function() {
                 CalendarScroller.close();
             }
@@ -54,7 +54,7 @@ requireJS引用
 
         CalendarScroller.show(opt);
 
-2. 关闭弹层：
+2. 关闭弹层，自动调用resetAll()重置jroll对象：
         
         CalendarScroller.close();
 
@@ -64,6 +64,10 @@ requireJS引用
 
 更新日志：
 -------------
+v1.1.1
+
+        1. 确定和取消的回调不再自动调用resetAll()，在close()中自动调用resetAll()。
+
 v1.0.5
         
         1. 修改了弹层后没有很好的屏蔽document.on("touchmove")的bug
